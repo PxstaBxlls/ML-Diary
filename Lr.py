@@ -8,15 +8,15 @@ data = data.dropna(subset=['Years of Experience', 'Salary'])
 x = data.iloc[:, -2].values
 y = data.iloc[:, -1].values
 
-
-def loss_ftn(m,b,x,y):
+#creating the loss ftn
+def loss_ftn(m,b,x,y): 
     total_cost = 0
     n = len(x)
     for i in range(n):
         total_cost += (y[i] - (m*x[i] + b))**2
     return total_cost/float(n)
 
-
+#creating the gradient descnet for 1 time fitting 
 def gradient_descent(x,y,m,b,learning_rate):
     n = len(x)
     m_gradient = 0
@@ -37,6 +37,7 @@ x = (x - x.mean()) / x.std()
 y = (y - y.mean()) / y.std()
 
 cost = []
+#letting 5k loops to run for training the data better and optimising the value of m and b
 for i in range(epochs):
     m,b = gradient_descent(x,y,m,b,learning_rate)
     cost.append(loss_ftn(m,b,x,y))
